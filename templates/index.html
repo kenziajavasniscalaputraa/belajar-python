@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kenzia | Portfolio</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700&family=Outfit:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;    
+        padding: 0;
+        box-sizing: border-box;
+        transition: 0.3s ease;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: radial-gradient(circle at top left, #000, #0a0a0a, #1a0000);
+        color: #eee;
+        overflow-x: hidden;
+      }
+
+      /* ✨ SCANLINE HOLOGRAM EFFECT */
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background: repeating-linear-gradient(
+          to bottom,
+          rgba(255, 0, 0, 0.03) 0px,
+          rgba(255, 0, 0, 0.03) 1px,
+          transparent 2px,
+          transparent 3px
+        );
+        mix-blend-mode: overlay;
+        opacity: 0.7;
+      }
+
+      /* ✨ FLOATING PARTICLES */
+      body::before {
+        content: "";
+        position: fixed;
+        width: 200%;
+        height: 200%;
+        background-image: radial-gradient(rgba(255, 80, 80, 0.5), transparent 40%);
+        animation: floatParticles 18s infinite linear;
+        pointer-events: none;
+      }
+
+      @keyframes floatParticles {
+        from {
+          transform: translate(-10%, -10%);
+        }
+        to {
+          transform: translate(10%, 10%);
+        }
+      }
+
+      /* VERIFICATION SCREEN */
+      #verifyScreen {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.95);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 999999;
+        text-align: center;
+        color: white;
+      }
+
+      #verifyScreen input {
+        padding: 12px;
+        width: 260px;
+        border-radius: 10px;
+        border: none;
+        text-align: center;
+        margin-bottom: 15px;
+        background: #220000;
+        color: white;
+        box-shadow: 0 0 12px rgba(255, 0, 0, 0.4);
+      }
+
+      #verifyScreen button {
+        padding: 10px 25px;
+        background: #ff3333;
+        border: none;
+        border-radius: 8px;
+        color: #fff;
+        cursor: pointer;
+        font-weight: 600;
+        box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
+      }
+
+      /* HEADER */
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 20px 60px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(255, 0, 0, 0.3);
+        z-index: 1000;
+        box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+      }
+
+      header h1 {
+        color: #ff3333;
+        font-weight: 700;
+        text-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+      }
+
+      nav a {
+        color: #eee;
+        margin-left: 25px;
+        text-decoration: none;
+        font-size: 0.95rem;
+      }
+
+      nav a:hover {
+        color: #ff3333;
+        text-shadow: 0 0 12px rgba(255, 0, 0, 0.7);
+      }
+
+      .theme-toggle {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        background: transparent;
+        border: 2px solid #ff3333;
+        color: #ff3333;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
+      }
+
+      /* HERO */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 0 20px;
+      }
+
+      .hero img {
+         width: 130px;
+         height: 130px;
+         object-fit: cover;
+         object-position: center;
+         border-radius: 50%;
+         border: 3px solid #ff3333;
+         box-shadow: 0 0 25px rgba(255, 0, 0, 0.8);
+         margin-bottom: 25px;
+         animation: floatImage 6s ease-in-out infinite, glowPulse 3s infinite;
+}
+
+
+      @keyframes glowPulse {
+        0% {
+          box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+        }
+        50% {
+          box-shadow: 0 0 30px rgba(255, 0, 0, 0.6);
+        }
+        100% {
+          box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+        }
+      }
+
+      .btn {
+        margin-top: 25px;
+        padding: 12px 35px;
+        border-radius: 30px;
+        background: linear-gradient(90deg, #990000, #ff3333);
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+        box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+      }
+
+      .btn:hover {
+        transform: scale(1.07);
+        box-shadow: 0 0 25px rgba(255, 40, 40, 0.9);
+      }
+
+      section {
+        padding: 100px 60px;
+        text-align: center;
+      }
+
+      section h2 {
+        font-size: 2rem;
+        margin-bottom: 40px;
+        color: #ff3333;
+        text-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
+      }
+
+      .projects {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+      }
+
+      .card {
+        background: rgba(30, 0, 0, 0.8);
+        padding: 25px;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 30, 30, 0.2);
+        box-shadow: 0 0 15px rgba(255, 0, 0, 0.1);
+        backdrop-filter: blur(4px);
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* ✨ CARD NEON HIGHLIGHT */
+      .card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 20px;
+        background: linear-gradient(
+          120deg,
+          transparent,
+          rgba(255, 50, 50, 0.4),
+          transparent
+        );
+        transform: translateX(-100%);
+        animation: neonSlide 4s infinite;
+      }
+
+      @keyframes neonSlide {
+        0% {
+          transform: translateX(-100%);
+        }
+        50% {
+          transform: translateX(100%);
+        }
+        100% {
+          transform: translateX(-100%);
+        }
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0 25px rgba(255, 0, 0, 0.3);
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        max-width: 500px;
+        padding: 12px;
+        border-radius: 10px;
+        border: none;
+        background: rgba(50, 0, 0, 0.6);
+        color: #fff;
+      }
+
+      .btn-send {
+        padding: 10px 30px;
+        background: linear-gradient(90deg, #990000, #ff3333);
+        border: none;
+        border-radius: 25px;
+        color: white;
+        cursor: pointer;
+      }
+
+     
+/* --- SOCIAL POPUP MODERN --- */
+#socialModal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+}
+
+#socialModal .popup-box {
+  background: #1a0000;
+  padding: 25px 35px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 360px;
+  text-align: center;
+  box-shadow: 0 0 25px rgba(255, 0, 0, 0.5);
+  border: 1px solid rgba(255, 50, 50, 0.4);
+}
+
+/* LIST SOSMED */
+.social-popup a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  text-decoration: none;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(60, 0, 0, 0.6);
+  margin-top: 12px;
+  border: 1px solid rgba(255, 50, 50, 0.2);
+  transition: 0.25s ease;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.15);
+}
+
+.social-popup a:hover {
+  background: #ff3333;
+  transform: translateX(6px);
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
+  border-color: white;
+}
+
+.social-popup svg {
+  width: 20px;
+  height: 20px;
+  fill: white;
+}
+
+/* Tombol Tutup */
+.close-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: #990000;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  color: white;
+  font-weight: 600;
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
+}
+
+.close-btn:hover {
+  background: #ff3333;
+  transform: scale(1.05);
+}
+</style>
+    
+  <body>
+    <a href="dashboard.html">Admin Dashboard</a>
+
+    <!-- VERIFICATION POPUP -->
+    <div id="verifyScreen">
+      <h2 style="margin-bottom: 15px; color: #ff3333">Verification Required</h2>
+      <p style="opacity: 0.8; margin-bottom: 20px">
+        Enter the verification code to access the website
+      </p>
+
+      <input id="verifyInput" type="text" placeholder="Enter Code" />
+
+      <button onclick="checkVerification()">Verify</button>
+
+      <p id="verifyError" style="color: red; margin-top: 15px; display: none">
+        Wrong code, try again.
+      </p>
+    </div>
+
+    <!-- WEBSITE ASLI -->
+    <header>
+      <h1>Kenzia</h1>
+      <div style="display: flex; align-items: center; gap: 20px">
+        <nav>
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <button id="theme-toggle" class="theme-toggle">🌙</button>
+      </div>
+    </header>
+
+    <section class="hero" id="home">
+      <img src="images/kenzi.jpg" alt="Profile" />
+      <h2>
+        Hello, I’m
+        <span style="color: #ff6666">Kenzia Javas Niscala Putra</span>
+      </h2>
+      <p>
+        I am a beginner web developer who loves creating modern and interactive
+        designs.
+      </p>
+      <button
+        class="btn"
+        onclick="document.getElementById('abo ut').scrollIntoView({behavior:'smooth'})"
+      >
+        Learn More
+      </button>
+    </section>
+
+    <section id="about">
+      <h2>About Me</h2>
+      <p style="max-width: 650px; margin: auto">
+        👋 Hi! I’m Kenzia Javas Niscala Putra, Hi! I'm a passionate beginner developer who loves learning new technologies and building clean, simple, and functional digital experiences. I enjoy exploring web development, improving my coding skills, and turning ideas into real projects.
+      </p>
+    </section>
+
+    <section id="projects">
+      <h2>My Projects</h2>
+
+      <div class="projects">
+        <div class="card">
+          <h3>Landing Page</h3>
+          <p>Clean, modern, responsive landing page.</p>
+        </div>
+        <div class="card">
+          <h3>Portfolio Website</h3>
+          <p>Red/black theme with elegant animations.</p>
+        </div>
+        <div class="card">
+          <h3>To-Do App</h3>
+          <p>Simple productivity tool with smooth UI.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact Me</h2>
+      <p>Let’s connect or collaborate on something amazing!</p>
+
+      <button class="btn" onclick="openSocials()">🌐 Sosial Media Saya</button>
+
+      <form id="contactForm">
+        <input type="text" id="name" placeholder="Your Name" required />
+        <input type="email" id="email" placeholder="Your Email" required />
+        <textarea id="message" placeholder="Your Message" required></textarea>
+        <button class="btn-send" type="submit">Send Message</button>
+      </form>
+    </section>
+
+    <div id="socialModal">
+      <div class="popup-box">
+        <h3 style="color: #ff3333">Sosial Media Saya</h3>
+
+        <a href="mailto:javastelkomschool@gmail.com">📧 Gmail</a>
+        <a href="https://instagram.com/kenzijvs" target="_blank">📸 Instagram</a>
+        <a href="https://www.tiktok.com/@kenungkeh" target="_blank">🎵 TikTok</a>
+        <a href="https://discord.gg/Qv7Q2zf7" target="_blank">💬 Discord</a>
+
+        <button onclick="closeSocials()">Tutup</button>
+      </div>
+    </div>
+
+    <footer>© 2025 Kenzia Javas Niscala Putra — All Rights Reserved</footer>
+
+    <script>
+      const correctCode = "2521";
+
+      function checkVerification() {
+        const input = document.getElementById("verifyInput").value;
+        const error = document.getElementById("verifyError");
+
+        if (input === correctCode) {
+          document.getElementById("verifyScreen").style.display = "none";
+        } else {
+          error.style.display = "block";
+        }
+      }
+
+      function openSocials() {
+        document.getElementById("socialModal").style.display = "flex";
+      }
+
+      function closeSocials() {
+        document.getElementById("socialModal").style.display = "none";
+      }
+    </script>
+  </body>
+</html>
