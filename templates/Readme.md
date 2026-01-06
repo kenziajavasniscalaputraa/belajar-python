@@ -18,6 +18,7 @@ Sebelum masuk ke website, pengunjung harus memasukkan kode verifikasi:
 ---
 
 ### 🎨 **Futuristic UI/UX**
+
 Website ini menggunakan tema:
 - Red-black cyber style  
 - Scanline hologram effect  
