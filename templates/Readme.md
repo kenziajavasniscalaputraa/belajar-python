@@ -128,4 +128,4 @@ Proyek ini dibuat oleh Kenzia Javas Niscala Putra dan bebas digunakan untuk bela
 Kenzia Javas Niscala Putra
 Beginner Web Developer
 Instagram: @kenzijvs
-TikTok: @kenungkeh
+TikTok: @niscalaaa_0
